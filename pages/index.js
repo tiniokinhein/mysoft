@@ -1,65 +1,98 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { NextSeo } from 'next-seo'
+import React from 'react'
+import HomeAbout from '../components/Home/HomeAbout'
+import HomeContact from '../components/Home/HomeContact'
+import HomeFull from '../components/Home/HomeFull'
+import ProductLists from '../components/Home/ProductLists'
+import ServiceLists from '../components/Home/ServiceLists'
+import Layout from '../components/Layout'
 
-export default function Home() {
+const Home = () => {
+
+  React.useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+
   return (
-    <div className={styles.container}>
+    <Layout>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>MySoft - System and Solutions</title>
+        <meta
+          name="description"
+          content="My Soft is system and solutions in Myanmar."
+        />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <NextSeo
+        title="MySoft - System and Solutions"
+        description="My Soft is system and solutions in Myanmar."
+        canonical={() => window !== undefined ? window.location.href : undefined}
+        openGraph={{
+          url: () => window !== undefined ? window.location.href : undefined,
+          title: 'MySoft - System and Solutions',
+          description: 'My Soft is system and solutions in Myanmar.',
+          images: [
+            {
+              url: '/assets/images/homeFull.jpg',
+              width: 900,
+              height: 800,
+              alt: 'MySoft - System and Solutions',
+            },
+            { url: '/assets/images/homeFull.jpg' }
+          ],
+          site_name: 'MySoft - System and Solutions',
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      <div>
+        <HomeFull />
+        <HomeAbout />
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className="py-5 bg-light">
+          <div className="container py-4">
+            <h4
+              className="mb-4 mt-0 font-bold text-dark text-center"
+              style={{
+                letterSpacing: '-1px',
+                fontSize: '2rem'
+              }}
+            >
+              Our Products
+            </h4>
+            <ProductLists />
+          </div>
         </div>
-      </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+        <div className="py-5 bg-white">
+          <div className="container pt-4">
+            <h4
+              className="mb-4 mt-0 font-bold text-dark text-center"
+              style={{
+                letterSpacing: '-1px',
+                fontSize: '2rem'
+              }}
+            >
+              Our Services
+            </h4>
+            <ServiceLists />
+          </div>
+        </div>
+
+        <div className="py-5 bg-light">
+          <div className="container py-5">
+            <HomeContact />
+          </div>
+        </div>
+
+      </div>
+    </Layout>
   )
 }
+
+export default Home
